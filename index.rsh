@@ -62,7 +62,7 @@ export const main = Reach.App(
                             msg: hamle
                         });
                     }),
-                    (hamle => ucret),
+                    //(hamle => ucret),
                     (hamle) => {
                         // Oyuncuların hamleyi görmesi, 
                         // ikincisi paranın admine verilmesi

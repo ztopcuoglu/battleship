@@ -69,7 +69,7 @@ exports.Deploy = class extends React.Component {
             <Fragment>
                 <div className="container">
                     <div className="row j-center flex-column w-400 m-auto mt-5">
-                        <p className="subtext">Ücret (hamle başı ödenecek miktar): <strong>{ucret}</strong> {standardUnit}
+                        <p className="subtext">Ücret (Oyun için ödenecek ücret): <strong>{ucret}</strong> {standardUnit}
                         </p>
                         <br />
                         <button className="attach-button"

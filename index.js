@@ -6,7 +6,7 @@ import DeployerViews from './views/DeployerViews';
 import AttacherViews from './views/AttacherViews';
 import { renderDOM, renderView } from './views/render';
 import * as backend from './build/index.main.mjs';
-import * as reach from '@reach-sh/stdlib/ETH';
+import * as reach from '@reach-sh/stdlib/ALGO';
 
 //import './App.css';
 import './src/index.css'

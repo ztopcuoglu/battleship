@@ -124,6 +124,7 @@ exports.HamleYap = class extends React.Component {
               isGone: false,
             },],
             hittedShips: 0,
+            buttonValue : 0,
 
 
             
@@ -218,6 +219,7 @@ exports.HamleYap = class extends React.Component {
                     var sendToTheAdmin = [this.state.fireCounter, 0,0,0,0,0,0,0,0,0];
                     this.setState ({hamleListesi: sendToTheAdmin});
                     console.log(sendToTheAdmin);
+                    this.setState({buttonValue: 1});
                     //hamleYapBelirle(sendToTheAdmin);
                   }
                   //console.log("SHIP IS GONE");
@@ -370,9 +372,9 @@ exports.HamleYap = class extends React.Component {
 
       <h5>Atılan Atış Sayısı: {this.state.fireCounter}</h5>
       <Board squares={this.state.history} onClick={this.handleClick} />
-      <button type="button"      onClick={() => {
-                                            parent.hamleYapBelirle(this.state.hamleListesi);
-                                        }}>GÖNDER</button>
+
+      <button disabled = {!this.state.buttonValue} id="send-all-button" type="button" 
+              onClick={() => {parent.hamleYapBelirle(this.state.hamleListesi);}}>GÖNDER</button>
       
         </Fragment>
          )
