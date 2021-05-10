@@ -15,8 +15,8 @@ const AdminInterface = {
 };
 
 const OyuncuInterface = {
-    hamleYap: Fun([], Array(UInt, 10)),
-    hamleyiGor: Fun([Array(UInt, 10)], Null)
+    hamleYap: Fun([], UInt),
+    hamleyiGor: Fun([UInt], Null)
 }
 
 // Kontrat kodu
@@ -75,7 +75,7 @@ export const main = Reach.App(
                         });
                         
                        
-                        kimKazandi = winner(hamle[0]);
+                        kimKazandi = winner(hamle);
                         continue;
                     }
                 )

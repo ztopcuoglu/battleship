@@ -82,7 +82,7 @@ class Deployer extends React.Component {
 class Attacher extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { view: 'Attach', oncekiHamle: [0,], account: props.account };
+        this.state = { view: 'Attach', oncekiHamle: 0, account: props.account };
     }
     attach(ctcInfoStr) {
         const ctc = this.props.acc.attach(backend, JSON.parse(ctcInfoStr));
@@ -112,8 +112,8 @@ class Attacher extends React.Component {
     async hamleyiGor(hamleListesi) {
         const atomikBakiye = await reach.balanceOf(this.state.account);
         const bakiye = reach.formatCurrency(atomikBakiye, 4);
-        let filtreArray = hamleListesi.filter(hamle => reach.bigNumberToNumber(hamle) !== 0);
-        this.setState((state) => ({ oncekiHamle: [...this.state.oncekiHamle, ...filtreArray], bakiye: bakiye}));
+        let filtreArray = reach.bigNumberToNumber(hamleListesi);
+        this.setState((state) => ({ oncekiHamle: filtreArray, bakiye: bakiye}));
     }
 
 

@@ -15,7 +15,7 @@ exports.Wrapper = class extends React.Component {
         const { content } = this.props;
         return (
             <div className="Player">
-                <h2 style={{ marginLeft: "50px" }} className="header-main-sub">
+                <h2 className="header-main-sub">
                     Oyuncu
           </h2>
                 {content}
@@ -76,7 +76,7 @@ exports.HamleYap = class extends React.Component {
         super(props);
         this.state = {
             hamle: 0,
-            hamleListesi: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            hamleListesi: 0,
             index: 0,
             fireCounter: 0,
             squares : Array(100).fill(null),
@@ -216,7 +216,7 @@ exports.HamleYap = class extends React.Component {
                     console.log("WINNER RATE", winnerRate);
                     this.setState({winner: winnerRate});
                     console.log("WINNER", this.state.winner);
-                    var sendToTheAdmin = [this.state.fireCounter, 0,0,0,0,0,0,0,0,0];
+                    var sendToTheAdmin = [this.state.fireCounter];
                     this.setState ({hamleListesi: sendToTheAdmin});
                     console.log(sendToTheAdmin);
                     this.setState({buttonValue: 1});
@@ -318,66 +318,81 @@ exports.HamleYap = class extends React.Component {
                 //this.generateShipLocations();
                 render() {
                   
-                  const { parent, oncekiHamle, bakiye } = this.props;
+                  const { parent, oncekiHamle, standardUnit, bakiye } = this.props;
         return ( 
-          
           <Fragment>
-  <h4>Güncel Bakiye : {bakiye}</h4>
-      <div className="column">
-        <h4>
-          {this.state.ships[0].isGone ? (
-            <del> {this.state.ships[0].name} battı! </del>
-          ) : (
-            `${this.state.ships[0].name} hayatta!`
-          )}{" "}
-        </h4>
-        <h4>
-          {this.state.ships[1].isGone ? (
-            <del> {this.state.ships[1].name} battı! </del>
-          ) : (
-            `${this.state.ships[1].name} hayatta!`
-          )}{" "}
-        </h4>
-        <h4>
-          {this.state.ships[2].isGone ? (
-            <del> {this.state.ships[2].name} battı! </del>
-          ) : (
-            `${this.state.ships[2].name} hayatta!`
-          )}{" "}
-        </h4>
-        <h4>
-          {this.state.ships[3].isGone ? (
-            <del> {this.state.ships[3].name} battı! </del>
-          ) : (
-            `${this.state.ships[3].name} hayatta!`
-          )}{" "}
-        </h4>
-        <h4>
-          {this.state.ships[4].isGone ? (
-            <del> {this.state.ships[4].name} battı! </del>
-          ) : (
-            `${this.state.ships[4].name} hayatta!`
-          )}{" "}
-        </h4>
-      </div>
-        <br/>
-        <div className="info-wrapper">
-        <h3>
-          {this.state.winner
-            ? "Gemilerin hepsini %" + this.state.winner + " ile batırdın! Sonucunu gönder."
-            : "Gemileri batırmaya devam..."}
-        </h3>
-        <h3>{"Batırılan Gemiler: " + this.state.hittedShips}</h3>
-      </div>
-
-      <h5>Atılan Atış Sayısı: {this.state.fireCounter}</h5>
-      <Board squares={this.state.history} onClick={this.handleClick} />
-
-      <button disabled = {!this.state.buttonValue} id="send-all-button" type="button" 
-              onClick={() => {parent.hamleYapBelirle(this.state.hamleListesi);}}>GÖNDER</button>
-      
-        </Fragment>
-         )
+            <h4>Güncel Bakiye : {bakiye} {standardUnit}</h4>
+  
+            <div className="column">
+              <h4>
+                  {this.state.ships[0].isGone ? (
+                    <del>
+                      {" "}
+                      {this.state.ships[0].name} [{this.state.ships[0].length}]
+                    </del>
+                  ) : (
+                    `${this.state.ships[0].name} [${this.state.ships[0].length}]`
+                  )}{" "}
+                </h4>
+                <h4>
+                  {this.state.ships[1].isGone ? (
+                    <del>
+                      {" "}
+                      {this.state.ships[1].name} [{this.state.ships[1].length}]
+                    </del>
+                  ) : (
+                    `${this.state.ships[1].name} [${this.state.ships[1].length}]`
+                  )}{" "}
+                </h4>
+                <h4>
+                  {this.state.ships[2].isGone ? (
+                    <del>
+                      {" "}
+                      {this.state.ships[2].name} [{this.state.ships[2].length}]
+                    </del>
+                  ) : (
+                    `${this.state.ships[2].name} [${this.state.ships[2].length}]`
+                  )}{" "}
+                </h4>
+                <h4>
+                  {this.state.ships[3].isGone ? (
+                    <del>
+                      {" "}
+                      {this.state.ships[3].name} [{this.state.ships[3].length}]
+                    </del>
+                  ) : (
+                    `${this.state.ships[3].name} [${this.state.ships[3].length}]`
+                  )}{" "}
+                </h4>
+                <h4>
+                  {this.state.ships[4].isGone ? (
+                    <del>
+                      {" "}
+                      {this.state.ships[4].name} [{this.state.ships[4].length}]
+                    </del>
+                  ) : (
+                    `${this.state.ships[4].name} [${this.state.ships[4].length}]`
+                  )}{" "}
+                </h4>
+              </div>
+              <br/>
+              <div className="score-area">
+              <h4>
+                {" "}
+                {this.state.winner
+                ? "Gemilerin hepsini %" + this.state.winner + " ile batırdın! Sonucunu gönder."
+                : "Gemileri batırmaya devam..."}
+              </h4>
+              <div className="score-area-info">
+                <h5> Atılan Atış Sayısı: {this.state.fireCounter}</h5>
+                <h5> {"Batırılan Gemiler: " + this.state.hittedShips}</h5>
+              </div>
+            </div>
+            <Board squares={this.state.history} onClick={this.handleClick} />
+            <button disabled = {!this.state.buttonValue} id="send-all-button" type="button" 
+                  onClick={() => {parent.hamleYapBelirle(this.state.hamleListesi);}}>GÖNDER</button>
+          </Fragment>
+        )
     }
   };
 

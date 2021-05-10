@@ -95,7 +95,7 @@ li {
 }
 del {
   text-decoration: line-through;
-  background-color: red;
+  background-color: black;
   color: #555;
 }
 .info-wrapper button {
@@ -127,10 +127,42 @@ h5 {
   clear: both;
 }
 
-#header-main-sub{
+.header-main-sub{
   text-align: center;
   justify-content: center;
   color: aliceblue;
   font-size: 35px;
   cursor: pointer;
+}
+
+.score-area {
+  display: grid;
+  text-align: center;
+  width: 100%;
+  padding: 0 0 20px 0;
+}
+
+.score-area-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+}
+.score-area h5 {
+  text-align: center;
+  color: rgb(141, 137, 137);
+  border: 2px dashed black;
+  padding: 20px;
+}
+
+.score-area h4 {
+  text-align: center;
+}
+
+.column {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid black;
 }
