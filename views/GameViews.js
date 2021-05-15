@@ -225,7 +225,7 @@ const Game = () => {
   };
   return (
     <>
-      <h1>Amiral Battı</h1>
+      <h1>Battleship Game</h1>
       <div className="column">
         <h4>
           {ships[0].isGone ? (

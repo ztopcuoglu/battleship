@@ -1,5 +1,3 @@
-// Önyüz
-
 import React from 'react';
 import AppViews from './views/AppViews';
 import DeployerViews from './views/DeployerViews';
@@ -104,12 +102,7 @@ class Attacher extends React.Component {
         this.state.resolveHamle(hamle);
     }
 
-    async hamleyiInterneteGonder(hamleListesi) {
-        console.log(` ${hamleListesi} API'a gönderiliyor.`);
-
-    }
-
-    async hamleyiGor(hamleListesi) {
+    async sonucuGor(hamleListesi) {
         const atomikBakiye = await reach.balanceOf(this.state.account);
         const bakiye = reach.formatCurrency(atomikBakiye, 4);
         let filtreArray = reach.bigNumberToNumber(hamleListesi);

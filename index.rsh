@@ -1,13 +1,7 @@
-// Kontrat
-
-// TODO: Array'lerden 0'ları temizle
-
-// Versiyon numarası
 'reach 0.1';
 
-const [isOutcome,Berabere, AdminKazandi, OyuncuKazandi] = makeEnum(3);
-// Interface (arayüz) tanımlarımız
-const winner = (hamlee) =>((hamlee>50 ? 1: 2));
+const [isOutcome,GameDraw, GameAdmin, GamePlayer] = makeEnum(3);
+const winner = (firedTorpedos) =>((firedTorpedos>50 ? 1: 2));
 const AdminInterface = {
     ucret: UInt,
     oyunuBitir: Fun([], Bool),
@@ -16,10 +10,9 @@ const AdminInterface = {
 
 const OyuncuInterface = {
     hamleYap: Fun([], UInt),
-    hamleyiGor: Fun([UInt], Null)
+    sonucuGor: Fun([UInt], Null)
 }
 
-// Kontrat kodu
 export const main = Reach.App(
     {},
     [
@@ -27,20 +20,15 @@ export const main = Reach.App(
         Participant('Oyuncu', OyuncuInterface)
     ],
     (Admin, Oyuncu) => {
-        // Asıl mantık mekanizmamız
-        // Admin başta fiyatı belirler
         Admin.only(() => {
             const ucret = declassify(interact.ucret);
         });
         Admin.publish(ucret).pay(ucret);
         commit();
         Oyuncu.pay(ucret);
-        // Admin oyunu bitimini onaylamadığı sürece
-        // Oyuncular hamle oynar ve ücretini öder
-        //var oyunBitmeli = false;
-        var kimKazandi = Berabere;
+        var kimKazandi = GameDraw;
         invariant( isOutcome(kimKazandi));
-        while (kimKazandi==Berabere) {
+        while (kimKazandi==GameDraw) {
             commit();
             fork()
             .case(
@@ -49,7 +37,6 @@ export const main = Reach.App(
                     when: declassify(interact.oyunuBitir())
                 })),
                 () => {
-                    //oyunBitmeli = true;
                     continue;
                 }
             )
@@ -62,19 +49,14 @@ export const main = Reach.App(
                             msg: hamle
                         });
                     }),
-                    //(hamle => ucret),
                     (hamle) => {
-                        // Oyuncuların hamleyi görmesi, 
-                        // ikincisi paranın admine verilmesi
                         Oyuncu.only(() => {
-                            interact.hamleyiGor(hamle);
+                            interact.sonucuGor(hamle);
                         });
-                        //transfer(ucret).to(Admin);
                         Admin.only(()=>{
                             interact.transferiGor();
                         });
                         
-                       
                         kimKazandi = winner(hamle);
                         continue;
                     }
@@ -86,7 +68,7 @@ export const main = Reach.App(
                     }
                 );
         }
-        transfer(balance()).to(kimKazandi == AdminKazandi ? Admin : Oyuncu);
+        transfer(balance()).to(kimKazandi == GameAdmin ? Admin : Oyuncu);
         commit();
         exit();
     }

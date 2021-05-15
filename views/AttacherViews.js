@@ -16,7 +16,7 @@ exports.Wrapper = class extends React.Component {
         return (
             <div className="Player">
                 <h2 className="header-main-sub">
-                    Oyuncu
+                    Player
           </h2>
                 {content}
             </div>
@@ -32,7 +32,7 @@ exports.Attach = class extends React.Component {
             <Fragment>
                 <div className="container">
                     <div className="row j-center flex-column w-400 m-auto mt-5">
-                        Lütfen kontrat bilgilerini buraya yapıştırın:
+                        Please paste the contract details here:
                         <br />
                         <br />
                         <textarea
@@ -48,7 +48,7 @@ exports.Attach = class extends React.Component {
                             disabled={!ctcInfoStr}
                             onClick={() => parent.attach(ctcInfoStr)}
                         >
-                            Bağlan
+                            Attach
                          </button>
                     </div>
                 </div>
@@ -64,7 +64,7 @@ exports.Attaching = class extends React.Component {
         return (
             <div className="container">
                 <div className="row j-center">
-                    <h3 className="game-finished">Bağlanıyor, lütfen bekleyin...</h3>
+                    <h3 className="game-finished">Attaching, please wait...</h3>
                 </div>
             </div>
         );
@@ -321,7 +321,7 @@ exports.HamleYap = class extends React.Component {
                   const { parent, oncekiHamle, standardUnit, bakiye } = this.props;
         return ( 
           <Fragment>
-            <h4>Güncel Bakiye : {bakiye} {standardUnit}</h4>
+            <h4>Current Balance: {bakiye} {standardUnit}</h4>
   
             <div className="column">
               <h4>
@@ -380,17 +380,17 @@ exports.HamleYap = class extends React.Component {
               <h4>
                 {" "}
                 {this.state.winner
-                ? "Gemilerin hepsini %" + this.state.winner + " ile batırdın! Sonucunu gönder."
-                : "Gemileri batırmaya devam..."}
+                ? "You sank all ships with " + this.state.winner + "%! Please send your result to Admin."
+                : "Continue to sink them..."}
               </h4>
               <div className="score-area-info">
-                <h5> Atılan Atış Sayısı: {this.state.fireCounter}</h5>
-                <h5> {"Batırılan Gemiler: " + this.state.hittedShips}</h5>
+                <h5> Fired Torpedos: {this.state.fireCounter}</h5>
+                <h5> {"Sink Ships: " + this.state.hittedShips}</h5>
               </div>
             </div>
             <Board squares={this.state.history} onClick={this.handleClick} />
             <button disabled = {!this.state.buttonValue} id="send-all-button" type="button" 
-                  onClick={() => {parent.hamleYapBelirle(this.state.hamleListesi);}}>GÖNDER</button>
+                  onClick={() => {parent.hamleYapBelirle(this.state.hamleListesi);}}>SEND</button>
           </Fragment>
         )
     }

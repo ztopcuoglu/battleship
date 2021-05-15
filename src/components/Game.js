@@ -249,10 +249,10 @@ const Game = () => {
       <div className="info-wrapper">
         <h3>
           {winner
-            ? "You sunk them with accuracy of : " + winner + "%"
-            : "Continue to sunk all ships"}
+            ? "You sank them with accuracy of : " + winner + "%"
+            : "Continue to sink all ships"}
         </h3>
-        <h3>{"Sunk ships: " + getHittedShips()}</h3>
+        <h3>{"Sink ships: " + getHittedShips()}</h3>
       </div>
     </>
   );
